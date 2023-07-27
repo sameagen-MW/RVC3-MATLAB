@@ -1,6 +1,8 @@
 name: Run all book tests
 
 on: [push, workflow_dispatch]
+env:
+  MW_CONNECTOR_CONNECTION_PROFILES: loopbackHttps
 
 jobs:
   my-job:
