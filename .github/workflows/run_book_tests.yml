@@ -31,6 +31,10 @@ jobs:
         with:
           command: feature('NoFigureWindows')
           
+      - name: Run tests
+        run: |
+          matlab -batch runtests("test/book")
+          
       #- name: Run MATLAB Tests
         # Only run tests in folder test/book
         #uses: matlab-actions/run-tests@v1
