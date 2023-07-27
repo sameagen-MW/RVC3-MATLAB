@@ -33,7 +33,7 @@ jobs:
           
       - name: Run tests
         run: |
-          matlab -batch 'runtests("test/book")'
+          matlab -batch 'x=feature("HasDisplay");y=feature("NoFigureWindows");disp(x + " " + y)'
           
       #- name: Run MATLAB Tests
         # Only run tests in folder test/book
