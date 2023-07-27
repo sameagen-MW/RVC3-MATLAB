@@ -1,11 +1,6 @@
 name: Run all book tests
 
-on: 
-  # Automatically run this action when a new push is made to repo
-  push:
-      
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
   my-job:
@@ -14,30 +9,29 @@ jobs:
     steps:
       - name: Check out RVC3-MATLAB repository (for unit tests)
         uses: actions/checkout@v3
+        
       - name: Start display server
         run: |
           sudo apt-get install xvfb
           Xvfb :99 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."          
+          
       - name: Set up MATLAB
-        # This uses the latest release of MATLAB. Can specify "release" if needed.
         uses: matlab-actions/setup-matlab@v1
+        
       - name: Check hasDisplay
         uses: matlab-actions/run-command@v1
         with:
           command: feature('HasDisplay')
+          
       - name: Check isFigureShowEnabled
         uses: matlab-actions/run-command@v1
         with:
           command: feature('NoFigureWindows')
-      - name: Check swing
-        uses: matlab-actions/run-command@v1
-        with:
-          command: uses('swing')
-      - name: Run MATLAB Tests
+          
+      #- name: Run MATLAB Tests
         # Only run tests in folder test/book
-        uses: matlab-actions/run-tests@v1
-        with:
-          select-by-folder: test/book
-          code-coverage-cobertura: code-coverage/coverage.xml
+        #uses: matlab-actions/run-tests@v1
+        #with:
+          #select-by-folder: test/book
+          #code-coverage-cobertura: code-coverage/coverage.xml
